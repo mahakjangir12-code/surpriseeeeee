@@ -4,7 +4,10 @@ body {
     background-color: #ffeef2; 
     margin: 0; padding: 0;
     display: flex; justify-content: center; align-items: center;
-    min-height: 100vh; overflow-x: hidden;
+    min-height: 100vh; 
+    /* यहाँ केवल overflow-x: hidden; था, जिसे अब केवल body में नहीं रखते। 
+       अब केवल overflow: hidden; ही सही है अगर यह पूरी तरह से ठीक करना हो। */
+    overflow: hidden; 
 }
 
 #scrapbook-container {
@@ -12,7 +15,7 @@ body {
     background-color: #ffffff;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     border-radius: 20px; 
-    padding: 20px; /* कम पैडिंग */
+    padding: 20px; 
     position: relative; border: 5px dashed #f9c7d8; 
     min-height: 80vh;
 }
@@ -24,6 +27,8 @@ body {
     padding: 30px; box-sizing: border-box;
     background: #fffafa; border-radius: 15px;
     transition: opacity 0.6s ease-in-out;
+    /* 🗑️ महत्वपूर्ण: यहाँ से overflow-x: hidden; हटाया गया है, 
+       ताकि Page 3 पर overflow-y: auto; काम कर सके। */
 }
 .hidden { opacity: 0; pointer-events: none; z-index: 1; }
 .active { opacity: 1; z-index: 10; }
@@ -49,9 +54,12 @@ h3 { color: #ff69b4; text-align: center; }
 /* ------------------- पेज 2: सीधी फोटो (FINAL FIXED) ------------------- */
 #page-2 { 
     display: flex; flex-direction: column; 
-    justify-content: flex-start; /* कंटेंट को ऊपर से शुरू करें */
+    justify-content: flex-start; 
     align-items: center; 
-    padding-top: 20px; /* हेडिंग के लिए ऊपर जगह */
+    padding-top: 20px; 
+    /* ✅ पेज 2 के लिए भी स्क्रॉलिंग जोड़ें */
+    overflow-y: auto;
+    padding-bottom: 80px; 
 }
 .page-heading {
     margin-bottom: 25px; color: #ff69b4; font-size: 2.5em;
@@ -61,9 +69,9 @@ h3 { color: #ff69b4; text-align: center; }
 .straight-photo-container {
     border: 8px solid #ffc0cb; padding: 10px; background: white;
     border-radius: 5px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-    max-width: 90%; /* ज़्यादा चौड़ाई */
+    max-width: 90%; 
     margin: 20px auto; 
-    max-height: 85vh; /* ज़्यादा ऊंचाई */
+    max-height: 85vh; 
     overflow: hidden; 
 }
 .center-photo-straight { 
@@ -74,10 +82,15 @@ h3 { color: #ff69b4; text-align: center; }
 }
 
 
-/* ------------------- पेज 3: कोलाज गैलरी (FINAL FIXED) ------------------- */
+/* ------------------- पेज 3: कोलाज गैलरी (FINAL FIXED FOR SCROLLING) ------------------- */
+#page-3 { 
+    /* ✅ पेज 3 के लिए स्क्रॉलिंग जोड़ें */
+    overflow-y: auto; 
+    padding-bottom: 80px; /* बटन के लिए नीचे जगह */
+}
 .collage-grid {
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; 
-    max-width: 95%; /* अधिकतम चौड़ाई */
+    max-width: 95%; 
     margin: 30px auto;
 }
 .collage-item { 
@@ -94,10 +107,16 @@ h3 { color: #ff69b4; text-align: center; }
     background: #fff0f5; font-size: 1.1em; display: flex; align-items: center; 
     justify-content: center; text-align: center; padding: 15px;
     grid-column: span 1; transform: rotate(2deg); 
+    border: 4px solid #ff69b4; 
 }
 
 
 /* ------------------- पेज 4: शॉर्ट लेटर्स ------------------- */
+#page-4 {
+    /* ✅ पेज 4 के लिए स्क्रॉलिंग जोड़ें (अगर ज्यादा लेटर्स हों) */
+    overflow-y: auto; 
+    padding-bottom: 80px; 
+}
 .letters-grid {
     display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;
 }
@@ -114,7 +133,8 @@ h3 { color: #ff69b4; text-align: center; }
 .message-box {
     background: #fff8f8; border: 8px solid #ffc0cb; padding: 40px;
     border-radius: 20px; max-width: 750px; text-align: left;
-    max-height: 90%; overflow-y: auto; 
+    max-height: 90%; 
+    overflow-y: auto; /* यह पहले से था, सही है */
 }
 .message-box p { font-size: 1.1em; line-height: 1.7; margin-bottom: 15px; }
 .signature {
@@ -123,10 +143,14 @@ h3 { color: #ff69b4; text-align: center; }
 }
 .hint { color: #aaa; margin-top: 15px; font-size: 0.9em; text-align: center; }
 
-/* नेक्स्ट बटन */
+/* नेक्स्ट बटन (Positioning Fixed) */
 .next-btn {
-    position: absolute; bottom: 30px; right: 30px; padding: 10px 20px;
+    position: absolute; 
+    bottom: 30px; 
+    right: 30px; 
+    padding: 10px 20px;
     background-color: #ff69b4; color: white; border: none; border-radius: 5px;
     cursor: pointer; font-size: 1em; transition: background-color 0.3s;
+    z-index: 15; /* बटन को सभी कंटेंट के ऊपर रखें */
 }
 .next-btn:hover { background-color: #e65a9e; }
