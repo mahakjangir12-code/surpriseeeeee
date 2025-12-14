@@ -5,9 +5,7 @@ body {
     margin: 0; padding: 0;
     display: flex; justify-content: center; align-items: center;
     min-height: 100vh; 
-    /* यहाँ केवल overflow-x: hidden; था, जिसे अब केवल body में नहीं रखते। 
-       अब केवल overflow: hidden; ही सही है अगर यह पूरी तरह से ठीक करना हो। */
-    overflow: hidden; 
+    overflow: hidden; /* <--- सुनिश्चित करें: केवल एक बार यहाँ Hidden हो */
 }
 
 #scrapbook-container {
@@ -18,6 +16,7 @@ body {
     padding: 20px; 
     position: relative; border: 5px dashed #f9c7d8; 
     min-height: 80vh;
+    overflow: hidden; /* <--- सुनिश्चित करें: यहाँ भी Hidden हो */
 }
 
 /* पेज ट्रांजिशन */
@@ -27,8 +26,7 @@ body {
     padding: 30px; box-sizing: border-box;
     background: #fffafa; border-radius: 15px;
     transition: opacity 0.6s ease-in-out;
-    /* 🗑️ महत्वपूर्ण: यहाँ से overflow-x: hidden; हटाया गया है, 
-       ताकि Page 3 पर overflow-y: auto; काम कर सके। */
+    /* महत्वपूर्ण: यहाँ कोई overflow: hidden; या overflow-x नहीं होना चाहिए! */
 }
 .hidden { opacity: 0; pointer-events: none; z-index: 1; }
 .active { opacity: 1; z-index: 10; }
@@ -51,14 +49,13 @@ h3 { color: #ff69b4; text-align: center; }
 #open-surprise-btn:hover { background-color: #e65a9e; }
 
 
-/* ------------------- पेज 2: सीधी फोटो (FINAL FIXED) ------------------- */
+/* ------------------- पेज 2: सीधी फोटो (SCROLLING FIXED) ------------------- */
 #page-2 { 
     display: flex; flex-direction: column; 
     justify-content: flex-start; 
     align-items: center; 
     padding-top: 20px; 
-    /* ✅ पेज 2 के लिए भी स्क्रॉलिंग जोड़ें */
-    overflow-y: auto;
+    overflow-y: auto; /* ✅ पेज-स्पेसिफिक स्क्रॉलिंग */
     padding-bottom: 80px; 
 }
 .page-heading {
@@ -82,10 +79,9 @@ h3 { color: #ff69b4; text-align: center; }
 }
 
 
-/* ------------------- पेज 3: कोलाज गैलरी (FINAL FIXED FOR SCROLLING) ------------------- */
+/* ------------------- पेज 3: कोलाज गैलरी (SCROLLING FIXED) ------------------- */
 #page-3 { 
-    /* ✅ पेज 3 के लिए स्क्रॉलिंग जोड़ें */
-    overflow-y: auto; 
+    overflow-y: auto; /* ✅ पेज-स्पेसिफिक स्क्रॉलिंग */
     padding-bottom: 80px; /* बटन के लिए नीचे जगह */
 }
 .collage-grid {
@@ -111,10 +107,9 @@ h3 { color: #ff69b4; text-align: center; }
 }
 
 
-/* ------------------- पेज 4: शॉर्ट लेटर्स ------------------- */
+/* ------------------- पेज 4: शॉर्ट लेटर्स (SCROLLING FIXED) ------------------- */
 #page-4 {
-    /* ✅ पेज 4 के लिए स्क्रॉलिंग जोड़ें (अगर ज्यादा लेटर्स हों) */
-    overflow-y: auto; 
+    overflow-y: auto; /* ✅ पेज-स्पेसिफिक स्क्रॉलिंग */
     padding-bottom: 80px; 
 }
 .letters-grid {
@@ -128,13 +123,17 @@ h3 { color: #ff69b4; text-align: center; }
 }
 
 
-/* ------------------- पेज 5: फाइनल मैसेज ------------------- */
-#page-5 { display: flex; justify-content: center; align-items: center; text-align: center; }
+/* ------------------- पेज 5: फाइनल मैसेज (SCROLLING FIXED) ------------------- */
+#page-5 { 
+    display: flex; justify-content: center; align-items: center; text-align: center; 
+    overflow-y: auto; /* ✅ पेज-स्पेसिफिक स्क्रॉलिंग */
+    padding-bottom: 80px;
+}
 .message-box {
     background: #fff8f8; border: 8px solid #ffc0cb; padding: 40px;
     border-radius: 20px; max-width: 750px; text-align: left;
     max-height: 90%; 
-    overflow-y: auto; /* यह पहले से था, सही है */
+    overflow-y: auto; 
 }
 .message-box p { font-size: 1.1em; line-height: 1.7; margin-bottom: 15px; }
 .signature {
