@@ -1,0 +1,132 @@
+/* सामान्य और पृष्ठभूमि स्टाइलिंग */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #ffeef2; 
+    margin: 0; padding: 0;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh; overflow-x: hidden;
+}
+
+#scrapbook-container {
+    width: 90%; max-width: 1100px;
+    background-color: #ffffff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 20px; 
+    padding: 20px; /* कम पैडिंग */
+    position: relative; border: 5px dashed #f9c7d8; 
+    min-height: 80vh;
+}
+
+/* पेज ट्रांजिशन */
+.page {
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%;
+    padding: 30px; box-sizing: border-box;
+    background: #fffafa; border-radius: 15px;
+    transition: opacity 0.6s ease-in-out;
+}
+.hidden { opacity: 0; pointer-events: none; z-index: 1; }
+.active { opacity: 1; z-index: 10; }
+
+/* टेक्स्ट और हेडिंग */
+h1 { font-size: 3.5em; color: #ff69b4; text-shadow: 2px 2px #ffc0cb; text-align: center;}
+h2 { font-size: 2.2em; color: #ff69b4; text-align: center; margin-bottom: 20px;}
+h3 { color: #ff69b4; text-align: center; }
+
+
+/* ------------------- पेज 1: कवर पेज ------------------- */
+#page-1 { 
+    display: flex; flex-direction: column; justify-content: center; align-items: center; 
+    text-align: center;
+}
+#open-surprise-btn {
+    padding: 15px 30px; font-size: 1.2em; background-color: #ff69b4; color: white;
+    border: 3px solid #ffc0cb; border-radius: 30px; cursor: pointer; margin-top: 20px;
+}
+#open-surprise-btn:hover { background-color: #e65a9e; }
+
+
+/* ------------------- पेज 2: सीधी फोटो (FINAL FIXED) ------------------- */
+#page-2 { 
+    display: flex; flex-direction: column; 
+    justify-content: flex-start; /* कंटेंट को ऊपर से शुरू करें */
+    align-items: center; 
+    padding-top: 20px; /* हेडिंग के लिए ऊपर जगह */
+}
+.page-heading {
+    margin-bottom: 25px; color: #ff69b4; font-size: 2.5em;
+    border-bottom: 4px solid #ffc0cb; 
+    display: inline-block; padding-bottom: 5px;
+}
+.straight-photo-container {
+    border: 8px solid #ffc0cb; padding: 10px; background: white;
+    border-radius: 5px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    max-width: 90%; /* ज़्यादा चौड़ाई */
+    margin: 20px auto; 
+    max-height: 85vh; /* ज़्यादा ऊंचाई */
+    overflow: hidden; 
+}
+.center-photo-straight { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: contain; 
+    display: block; 
+}
+
+
+/* ------------------- पेज 3: कोलाज गैलरी (FINAL FIXED) ------------------- */
+.collage-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; 
+    max-width: 95%; /* अधिकतम चौड़ाई */
+    margin: 30px auto;
+}
+.collage-item { 
+    border: 4px solid #ffc0cb; padding: 5px; background: white; 
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1); transition: transform 0.3s;
+}
+/* तस्वीरों को घुमाव (Rotation) */
+.collage-grid .photo-item:nth-child(1) { transform: rotate(-3deg); }
+.collage-grid .photo-item:nth-child(3) { transform: rotate(5deg); }
+.collage-grid .photo-item:nth-child(4) { transform: rotate(-8deg); }
+.collage-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.small-note { 
+    background: #fff0f5; font-size: 1.1em; display: flex; align-items: center; 
+    justify-content: center; text-align: center; padding: 15px;
+    grid-column: span 1; transform: rotate(2deg); 
+}
+
+
+/* ------------------- पेज 4: शॉर्ट लेटर्स ------------------- */
+.letters-grid {
+    display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;
+}
+.letter-card {
+    width: 200px; padding: 20px; background: #fff0f5;
+    border: 2px solid #ff69b4; border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 0.95em;
+}
+
+
+/* ------------------- पेज 5: फाइनल मैसेज ------------------- */
+#page-5 { display: flex; justify-content: center; align-items: center; text-align: center; }
+.message-box {
+    background: #fff8f8; border: 8px solid #ffc0cb; padding: 40px;
+    border-radius: 20px; max-width: 750px; text-align: left;
+    max-height: 90%; overflow-y: auto; 
+}
+.message-box p { font-size: 1.1em; line-height: 1.7; margin-bottom: 15px; }
+.signature {
+    margin-top: 25px; font-style: italic; font-weight: bold; color: #ff69b4;
+    font-size: 1.2em; text-align: center;
+}
+.hint { color: #aaa; margin-top: 15px; font-size: 0.9em; text-align: center; }
+
+/* नेक्स्ट बटन */
+.next-btn {
+    position: absolute; bottom: 30px; right: 30px; padding: 10px 20px;
+    background-color: #ff69b4; color: white; border: none; border-radius: 5px;
+    cursor: pointer; font-size: 1em; transition: background-color 0.3s;
+}
+.next-btn:hover { background-color: #e65a9e; }
